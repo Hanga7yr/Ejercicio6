@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.PersistenceException;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -59,6 +61,9 @@ public class Ejercicio_2 {
 		        System.out.println("Se ha insertado correctamente el proyecto");
 			}catch(NumberFormatException ex) {
 				System.out.println("Error: No se ha insertado un número para la selección.");
+			}catch(PersistenceException e) {
+				System.out.println("Error: Ya existe un Empleado con ese DNI.");
+				t.rollback();
 			}
 		}catch(Exception e) {
 			System.out.println("Error:  " + e.getMessage());

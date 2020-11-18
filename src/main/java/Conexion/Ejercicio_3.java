@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.persistence.PersistenceException;
+
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.internal.build.AllowSysOut;
@@ -104,6 +106,9 @@ public class Ejercicio_3 {
 					System.out.println("Error: El empleado con dni " + dni + " ya existe.\nNo realizando inserción.");
 					t.rollback();
 				}
+			}catch(PersistenceException e) {
+				System.out.println("Error: Ya existe un Empleado con ese DNI.");
+				t.rollback();
 			}finally {}
 		}catch(Exception e) {
 			System.out.println("Error: " + e.getMessage());
